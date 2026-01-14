@@ -1,0 +1,311 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  background: #000000;
+  color: #ffffff;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  color: #ffffff;
+}
+
+.card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  border: 1px solid #333333;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.card:hover {
+  border-color: #ffffff;
+  box-shadow: 0 12px 48px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+h1 {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 3.5em;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  margin-bottom: 24px;
+  color: #ffffff;
+  font-size: 1.75em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+button {
+  background: #ffffff;
+  color: #000000;
+  border: 2px solid #ffffff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+button:hover:not(:disabled) {
+  background: #000000;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3);
+}
+
+button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+button:disabled {
+  background: #333333;
+  color: #666666;
+  border-color: #333333;
+  cursor: not-allowed;
+  transform: none;
+  opacity: 0.5;
+}
+
+input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid #333333;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  background: #0a0a0a;
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ffffff;
+  background: #111111;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+input::placeholder {
+  color: #666666;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid #222222;
+  transition: all 0.2s ease;
+  gap: 16px;
+  color: #ffffff;
+}
+
+.info-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+  margin: 0 -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 8px;
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #888888;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-value {
+  color: #ffffff;
+  font-family: 'Fira Code', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  word-break: break-all;
+  overflow-wrap: break-word;
+  text-align: right;
+  max-width: 60%;
+}
+
+.error {
+  color: #ff4444;
+  background: rgba(255, 68, 68, 0.1);
+  border: 1px solid rgba(255, 68, 68, 0.3);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.success {
+  color: #44ff44;
+  background: rgba(68, 255, 68, 0.1);
+  border: 1px solid rgba(68, 255, 68, 0.3);
+  padding: 16px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.connect-wallet {
+  text-align: center;
+  padding: 60px 40px;
+  color: #ffffff;
+}
+
+.connect-wallet h2 {
+  margin-bottom: 24px;
+  color: #ffffff;
+}
+
+.connect-wallet button {
+  font-size: 18px;
+  padding: 18px 40px;
+}
+
+.strategy-list {
+  margin-top: 20px;
+}
+
+.strategy-item {
+  background: linear-gradient(135deg, #0a0a0a 0%, #050505 100%);
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #222222;
+  transition: all 0.3s ease;
+  color: #ffffff;
+}
+
+.strategy-item:hover {
+  border-color: #ffffff;
+  transform: translateX(4px);
+}
+
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  margin-left: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge.lockup {
+  background: #ffffff;
+  color: #000000;
+}
+
+.badge.no-lockup {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+}
+
+/* RainbowKit overrides - Light theme for modal */
+[data-rk] {
+  --rk-colors-accentColor: #000000 !important;
+  --rk-colors-accentColorForeground: #ffffff !important;
+  --rk-colors-actionButtonBorder: #e0e0e0 !important;
+  --rk-colors-actionButtonBorderMobile: #e0e0e0 !important;
+  --rk-colors-actionButtonSecondaryBackground: #f5f5f5 !important;
+  --rk-colors-closeButton: #000000 !important;
+  --rk-colors-closeButtonBackground: #f5f5f5 !important;
+  --rk-colors-connectButtonBackground: #000000 !important;
+  --rk-colors-connectButtonBackgroundError: #ff4444 !important;
+  --rk-colors-connectButtonInnerBackground: #ffffff !important;
+  --rk-colors-connectButtonText: #ffffff !important;
+  --rk-colors-connectButtonTextError: #ffffff !important;
+  --rk-colors-connectionIndicator: #44ff44 !important;
+  --rk-colors-error: #ff4444 !important;
+  --rk-colors-generalBorder: #e0e0e0 !important;
+  --rk-colors-generalBorderDim: #d0d0d0 !important;
+  --rk-colors-menuItemBackground: #ffffff !important;
+  --rk-colors-modalBackdrop: rgba(0, 0, 0, 0.6) !important;
+  --rk-colors-modalBackground: #ffffff !important;
+  --rk-colors-modalBorder: #e0e0e0 !important;
+  --rk-colors-modalText: #000000 !important;
+  --rk-colors-modalTextDim: #666666 !important;
+  --rk-colors-modalTextSecondary: #000000 !important;
+  --rk-colors-profileAction: #f5f5f5 !important;
+  --rk-colors-profileActionHover: #e5e5e5 !important;
+  --rk-colors-profileForeground: #000000 !important;
+  --rk-colors-selectedOptionBorder: #000000 !important;
+  --rk-colors-standby: #666666 !important;
+}
+
+/* Loading animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}

@@ -1,0 +1,9 @@
+{
+  "sepolia": {
+    "mockUSDC": "0x63653c34d5f96Ac0F6fb780EDd2eE9384211Fe22",
+    "strategy1": "0x10C58B2A29ED7Ce9311AADA4ab907BA8d511ef03",
+    "strategy2": "0xBB3C6c4B6A09D0637f7af0e832484e83754D142c",
+    "vault": "0x3F56A2f7042a7b977eEC10D5DBaC35Cd89744c57"
+  }
+}
+
