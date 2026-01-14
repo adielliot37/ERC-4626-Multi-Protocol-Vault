@@ -46,10 +46,10 @@ const STRATEGY_ABI = [
   { inputs: [], name: 'hasLockup', outputs: [{ name: '', type: 'bool' }], stateMutability: 'view', type: 'function' },
 ]
 
-const VAULT_ADDRESS = '0x3F56A2f7042a7b977eEC10D5DBaC35Cd89744c57'
+const VAULT_ADDRESS = '0xE16B4cCD109649DdcA66c50Bb627F77c4a96e77c'
 const USDC_ADDRESS = '0x63653c34d5f96Ac0F6fb780EDd2eE9384211Fe22'
-const STRATEGY1_ADDRESS = '0x10C58B2A29ED7Ce9311AADA4ab907BA8d511ef03'
-const STRATEGY2_ADDRESS = '0xBB3C6c4B6A09D0637f7af0e832484e83754D142c'
+const STRATEGY1_ADDRESS = '0xa0532ac24813E2a04594b9554f2D73b44640c7a4'
+const STRATEGY2_ADDRESS = '0x4AC1201EE7BF886EfdFA7d4d19678B536Ff0c35a'
 
 function App() {
   const { address, isConnected } = useAccount()
@@ -58,7 +58,7 @@ function App() {
   const { writeContract, data: hash, isPending } = useWriteContract()
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash })
 
-  const [vaultAddress, setVaultAddress] = useState('0x3F56A2f7042a7b977eEC10D5DBaC35Cd89744c57')
+  const [vaultAddress, setVaultAddress] = useState('0xE16B4cCD109649DdcA66c50Bb627F77c4a96e77c')
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawAmount, setWithdrawAmount] = useState('')
   const [redeemShares, setRedeemShares] = useState('')

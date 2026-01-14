@@ -101,6 +101,11 @@ contract MultiProtocolVault is ERC20, IERC4626, AccessControl, Pausable {
         
         _mint(receiver, shares);
         emit Deposit(msg.sender, receiver, assets, shares);
+        
+        uint256 currentTotalAssets = totalAssets();
+        uint256 currentTotalShares = totalSupply();
+        uint256 sharePrice = currentTotalShares > 0 ? (currentTotalAssets * 1e18) / currentTotalShares : 1e18;
+        emit YieldUpdate(currentTotalAssets, currentTotalShares, sharePrice);
     }
     
     function maxMint(address) public view override returns (uint256) {
@@ -167,7 +172,6 @@ contract MultiProtocolVault is ERC20, IERC4626, AccessControl, Pausable {
         
         emit Withdraw(msg.sender, receiver, owner, assets, shares);
         
-        // Emit yield tracking event
         uint256 currentTotalAssets = totalAssets();
         uint256 currentTotalShares = totalSupply();
         uint256 sharePrice = currentTotalShares > 0 ? (currentTotalAssets * 1e18) / currentTotalShares : 1e18;
@@ -240,6 +244,11 @@ contract MultiProtocolVault is ERC20, IERC4626, AccessControl, Pausable {
         }
         
         emit Rebalance(targetAmounts);
+        
+        uint256 currentTotalAssets = totalAssets();
+        uint256 currentTotalShares = totalSupply();
+        uint256 sharePrice = currentTotalShares > 0 ? (currentTotalAssets * 1e18) / currentTotalShares : 1e18;
+        emit YieldUpdate(currentTotalAssets, currentTotalShares, sharePrice);
     }
     
     // ============ Withdrawal Queue ============

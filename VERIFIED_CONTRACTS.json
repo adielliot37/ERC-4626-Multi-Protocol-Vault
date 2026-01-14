@@ -1,0 +1,30 @@
+{
+  "sepolia": {
+    "network": "Sepolia Testnet",
+    "verifiedDate": "2026",
+    "contracts": {
+      "strategy1": {
+        "address": "0xa0532ac24813E2a04594b9554f2D73b44640c7a4",
+        "name": "MockUnderlyingStrategy (No Lockup)",
+        "verified": true,
+        "etherscanUrl": "https://sepolia.etherscan.io/address/0xa0532ac24813E2a04594b9554f2D73b44640c7a4#code",
+        "description": "Strategy 1 - No lockup period, instant withdrawals"
+      },
+      "strategy2": {
+        "address": "0x4AC1201EE7BF886EfdFA7d4d19678B536Ff0c35a",
+        "name": "MockUnderlyingStrategy (With Lockup)",
+        "verified": true,
+        "etherscanUrl": "https://sepolia.etherscan.io/address/0x4AC1201EE7BF886EfdFA7d4d19678B536Ff0c35a#code",
+        "description": "Strategy 2 - 7-day lockup period, queued withdrawals"
+      },
+      "vault": {
+        "address": "0xE16B4cCD109649DdcA66c50Bb627F77c4a96e77c",
+        "name": "MultiProtocolVault",
+        "verified": true,
+        "etherscanUrl": "https://sepolia.etherscan.io/address/0xE16B4cCD109649DdcA66c50Bb627F77c4a96e77c#code",
+        "description": "ERC-4626 compliant vault with multi-protocol routing"
+      }
+    }
+  }
+}
+
