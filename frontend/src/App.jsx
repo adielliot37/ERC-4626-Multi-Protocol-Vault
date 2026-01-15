@@ -59,6 +59,9 @@ function App() {
   const { isLoading: isConfirming, isSuccess: isConfirmed } = useWaitForTransactionReceipt({ hash })
 
   const [vaultAddress, setVaultAddress] = useState('0xE16B4cCD109649DdcA66c50Bb627F77c4a96e77c')
+  
+  const isValidVaultAddress = isAddress(vaultAddress)
+  const isValidUsdcAddress = isAddress(USDC_ADDRESS)
   const [depositAmount, setDepositAmount] = useState('')
   const [withdrawAmount, setWithdrawAmount] = useState('')
   const [redeemShares, setRedeemShares] = useState('')
@@ -76,98 +79,98 @@ function App() {
     }
   }, [isConnected, chainId, switchChain])
 
-  const { data: usdcBalance, refetch: refetchUsdcBalance } = useReadContract({
-    address: USDC_ADDRESS,
-    abi: ERC20_ABI,
-    functionName: 'balanceOf',
-    args: address ? [address] : undefined,
-    query: { enabled: !!address && isAddress(USDC_ADDRESS), refetchInterval: 5000 },
-  })
-  
   const { data: usdcDecimals } = useReadContract({
-    address: USDC_ADDRESS,
+    address: isValidUsdcAddress ? USDC_ADDRESS : undefined,
     abi: ERC20_ABI,
     functionName: 'decimals',
-    query: { enabled: isAddress(USDC_ADDRESS) },
-  })
-
-  const { data: vaultShares, refetch: refetchVaultShares } = useReadContract({
-    address: vaultAddress,
-    abi: VAULT_ABI,
-    functionName: 'balanceOf',
-    args: address ? [address] : undefined,
-    query: { enabled: !!address && isAddress(vaultAddress), refetchInterval: 5000 },
-  })
-
-  const { data: totalAssets, refetch: refetchTotalAssets } = useReadContract({
-    address: vaultAddress,
-    abi: VAULT_ABI,
-    functionName: 'totalAssets',
-    query: { enabled: isAddress(vaultAddress), refetchInterval: 5000 },
-  })
-
-  const { data: totalSupply, refetch: refetchTotalSupply } = useReadContract({
-    address: vaultAddress,
-    abi: VAULT_ABI,
-    functionName: 'totalSupply',
-    query: { enabled: isAddress(vaultAddress), refetchInterval: 5000 },
+    query: { enabled: isValidUsdcAddress },
   })
 
   const { data: strategiesCount, refetch: refetchStrategiesCount } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'getStrategiesCount',
-    query: { enabled: isAddress(vaultAddress), refetchInterval: 5000 },
+    query: { enabled: isValidVaultAddress },
+  })
+
+  const { data: usdcBalance, refetch: refetchUsdcBalance } = useReadContract({
+    address: isValidUsdcAddress ? USDC_ADDRESS : undefined,
+    abi: ERC20_ABI,
+    functionName: 'balanceOf',
+    args: address ? [address] : undefined,
+    query: { enabled: !!address && isValidUsdcAddress, refetchInterval: 15000 },
+  })
+
+  const { data: vaultShares, refetch: refetchVaultShares } = useReadContract({
+    address: isValidVaultAddress ? vaultAddress : undefined,
+    abi: VAULT_ABI,
+    functionName: 'balanceOf',
+    args: address ? [address] : undefined,
+    query: { enabled: !!address && isValidVaultAddress, refetchInterval: 15000 },
+  })
+
+  const { data: totalAssets, refetch: refetchTotalAssets } = useReadContract({
+    address: isValidVaultAddress ? vaultAddress : undefined,
+    abi: VAULT_ABI,
+    functionName: 'totalAssets',
+    query: { enabled: isValidVaultAddress, refetchInterval: 15000 },
+  })
+
+  const { data: totalSupply, refetch: refetchTotalSupply } = useReadContract({
+    address: isValidVaultAddress ? vaultAddress : undefined,
+    abi: VAULT_ABI,
+    functionName: 'totalSupply',
+    query: { enabled: isValidVaultAddress, refetchInterval: 15000 },
   })
 
   const { data: maxWithdraw, refetch: refetchMaxWithdraw } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'maxWithdraw',
     args: address ? [address] : undefined,
-    query: { enabled: !!address && isAddress(vaultAddress), refetchInterval: 5000 },
+    query: { enabled: !!address && isValidVaultAddress, refetchInterval: 15000 },
   })
 
   const { data: maxRedeem, refetch: refetchMaxRedeem } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'maxRedeem',
     args: address ? [address] : undefined,
-    query: { enabled: !!address && isAddress(vaultAddress), refetchInterval: 5000 },
+    query: { enabled: !!address && isValidVaultAddress, refetchInterval: 15000 },
   })
 
   const { data: withdrawalRequestCount, refetch: refetchWithdrawalRequestCount } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'withdrawalRequestCount',
     args: address ? [address] : undefined,
-    query: { enabled: !!address && isAddress(vaultAddress), refetchInterval: 5000 },
+    query: { enabled: !!address && isValidVaultAddress, refetchInterval: 15000 },
   })
 
   const { data: strategy0Info, refetch: refetchStrategy0 } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'getStrategyInfo',
     args: [BigInt(0)],
-    query: { enabled: isAddress(vaultAddress) && strategiesCount && Number(strategiesCount) >= 1, refetchInterval: 5000 },
+    query: { enabled: isValidVaultAddress && strategiesCount && Number(strategiesCount) >= 1, refetchInterval: 15000 },
   })
 
   const { data: strategy1Info, refetch: refetchStrategy1 } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'getStrategyInfo',
     args: [BigInt(1)],
-    query: { enabled: isAddress(vaultAddress) && strategiesCount && Number(strategiesCount) >= 2, refetchInterval: 5000 },
+    query: { enabled: isValidVaultAddress && strategiesCount && Number(strategiesCount) >= 2, refetchInterval: 15000 },
   })
 
   const MANAGER_ROLE_HASH = '0x241ecf16d79d0f8dbfb92cbc07fe17840425976cf0667f022fe9877caa831b08'
   
   const { data: hasManagerRole } = useReadContract({
-    address: vaultAddress,
+    address: isValidVaultAddress ? vaultAddress : undefined,
     abi: VAULT_ABI,
     functionName: 'hasRole',
-    args: address && isAddress(vaultAddress) ? [MANAGER_ROLE_HASH, address] : undefined,
-    query: { enabled: !!address && isAddress(vaultAddress) },
+    args: address && isValidVaultAddress ? [MANAGER_ROLE_HASH, address] : undefined,
+    query: { enabled: !!address && isValidVaultAddress },
   })
 
   useEffect(() => {
@@ -177,11 +180,11 @@ function App() {
   }, [hasManagerRole])
 
   const { data: allowance, refetch: refetchAllowance } = useReadContract({
-    address: USDC_ADDRESS,
+    address: isValidUsdcAddress ? USDC_ADDRESS : undefined,
     abi: ERC20_ABI,
     functionName: 'allowance',
-    args: address && isAddress(vaultAddress) ? [address, vaultAddress] : undefined,
-    query: { enabled: !!address && isAddress(vaultAddress), refetchInterval: 5000 },
+    args: address && isValidVaultAddress ? [address, vaultAddress] : undefined,
+    query: { enabled: !!address && isValidVaultAddress && isValidUsdcAddress, refetchInterval: 15000 },
   })
 
   const handleDepositAfterApproval = useCallback(async (amountStr) => {
@@ -911,10 +914,27 @@ function PendingWithdrawalItem({ vaultAddress, userAddress, requestId, onClaim, 
     abi: VAULT_ABI,
     functionName: 'getPendingWithdrawalInfo',
     args: userAddress ? [userAddress, BigInt(requestId)] : undefined,
-    query: { enabled: !!userAddress && isAddress(vaultAddress), refetchInterval: 5000 },
+    query: { enabled: !!userAddress && isAddress(vaultAddress), refetchInterval: 15000 },
   })
 
   const isClaimed = !withdrawalInfo || withdrawalInfo[2] === 0n
+  const strategyAddress = withdrawalInfo && withdrawalInfo[0] ? withdrawalInfo[0] : '0x0000000000000000000000000000000000000000'
+  const strategyRequestId = withdrawalInfo && withdrawalInfo[1] ? withdrawalInfo[1] : 0n
+  const amount = withdrawalInfo && withdrawalInfo[2] ? withdrawalInfo[2] : 0n
+
+  const STRATEGY_ABI_FOR_WITHDRAWAL = [
+    { inputs: [{ name: 'user', type: 'address' }, { name: 'requestId', type: 'uint256' }], name: 'getPendingWithdrawal', outputs: [{ name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' },
+  ]
+
+  const { data: strategyPendingAmount } = useReadContract({
+    address: strategyAddress !== '0x0000000000000000000000000000000000000000' ? strategyAddress : undefined,
+    abi: STRATEGY_ABI_FOR_WITHDRAWAL,
+    functionName: 'getPendingWithdrawal',
+    args: strategyAddress !== '0x0000000000000000000000000000000000000000' ? [vaultAddress, BigInt(strategyRequestId)] : undefined,
+    query: { enabled: !isClaimed && !!strategyAddress && strategyAddress !== '0x0000000000000000000000000000000000000000' && isAddress(vaultAddress), refetchInterval: 15000 },
+  })
+
+  const isReady = !isClaimed && strategyPendingAmount !== undefined && strategyPendingAmount > 0n
 
   if (isClaimed) {
     return (
@@ -948,22 +968,6 @@ function PendingWithdrawalItem({ vaultAddress, userAddress, requestId, onClaim, 
       </div>
     )
   }
-
-  const [strategyAddress, strategyRequestId, amount] = withdrawalInfo
-
-  const STRATEGY_ABI_FOR_WITHDRAWAL = [
-    { inputs: [{ name: 'user', type: 'address' }, { name: 'requestId', type: 'uint256' }], name: 'getPendingWithdrawal', outputs: [{ name: '', type: 'uint256' }], stateMutability: 'view', type: 'function' },
-  ]
-
-  const { data: strategyPendingAmount } = useReadContract({
-    address: strategyAddress,
-    abi: STRATEGY_ABI_FOR_WITHDRAWAL,
-    functionName: 'getPendingWithdrawal',
-    args: [vaultAddress, BigInt(strategyRequestId)],
-    query: { enabled: !!strategyAddress && strategyAddress !== '0x0000000000000000000000000000000000000000', refetchInterval: 5000 },
-  })
-
-  const isReady = strategyPendingAmount !== undefined && strategyPendingAmount > 0n
 
   return (
     <div style={{ 
